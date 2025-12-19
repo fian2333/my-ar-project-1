@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fa">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebAR — Image tracking example</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+  <!-- AR.js (A-Frame build with NFT / image tracking) -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.3.2/aframe/build/aframe-ar-nft.min.js"></script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+    .hint {
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: sans-serif;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="hint">دوربین را روی تصویر بگیر — اجازه دسترسی به دوربین را بده</div>
+
+  <a-scene
+    vr-mode-ui="enabled: false"
+    embedded
+    renderer="logarithmicDepthBuffer: true;"
+    arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
+    
+      <a-nft
+      type="nft"
+      url="markers/myMarker"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance="0.01"
+      smoothThreshold="5">
+      
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="1.4" height="0.8"
+        material="color: #000; opacity: 0.5">
+      </a-plane>
+
+      <a-entity
+        position="0 0 0.01"
+        rotation="-90 0 0"
+        text="value: هاها; align: center; anchor: center; width: 1.6; wrapCount: 20; color: #fff; font: https://cdn.jsdelivr.net/gh/etiennepinchon/aframe-fonts@master/fonts/DejaVu-sdf.json">
+      </a-entity>
+
+      <a-animation attribute="rotation"
+                   dur="6000"
+                   to=" -90 360 0"
+                   repeat="indefinite"
+                   easing="linear"></a-animation>
+    </a-nft>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+</html>
